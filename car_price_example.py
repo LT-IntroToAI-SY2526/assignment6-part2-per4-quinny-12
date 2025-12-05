@@ -47,27 +47,27 @@ def visualize_features(data):
         data: pandas DataFrame with features and Price
     """
     fig, axes = plt.subplots(2, 2, figsize=(12, 10))
-    fig.suptitle('Car Features vs Price', fontsize=16, fontweight='bold')
+    fig.suptitle('Car Features vs Price', fontsize=16, fontweight='bold', fontname='cursive')
     
     # Plot 1: Mileage vs Price
-    axes[0, 0].scatter(data['Mileage'], data['Price'], color='blue', alpha=0.6)
+    axes[0, 0].scatter(data['Mileage'], data['Price'], color='mediumturquoise', alpha=0.6)
     axes[0, 0].set_xlabel('Mileage (1000s of miles)')
     axes[0, 0].set_ylabel('Price ($)')
-    axes[0, 0].set_title('Mileage vs Price')
+    axes[0, 0].set_title('Mileage vs Price', fontweight='bold')
     axes[0, 0].grid(True, alpha=0.3)
     
     # Plot 2: Age vs Price
-    axes[0, 1].scatter(data['Age'], data['Price'], color='green', alpha=0.6)
+    axes[0, 1].scatter(data['Age'], data['Price'], color='hotpink', alpha=0.6)
     axes[0, 1].set_xlabel('Age (years)')
     axes[0, 1].set_ylabel('Price ($)')
-    axes[0, 1].set_title('Age vs Price')
+    axes[0, 1].set_title('Age vs Price', fontweight='bold')
     axes[0, 1].grid(True, alpha=0.3)
     
     # Plot 3: Brand vs Price
-    axes[1, 0].scatter(data['Brand'], data['Price'], color='red', alpha=0.6)
+    axes[1, 0].scatter(data['Brand'], data['Price'], color='crimson', alpha=0.6)
     axes[1, 0].set_xlabel('Brand (0=Toyota, 1=Honda, 2=Ford)')
     axes[1, 0].set_ylabel('Price ($)')
-    axes[1, 0].set_title('Brand vs Price')
+    axes[1, 0].set_title('Brand vs Price', fontweight='bold')
     axes[1, 0].grid(True, alpha=0.3)
     
     # Plot 4: Leave empty for now (or add another feature later)
