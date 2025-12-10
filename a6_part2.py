@@ -72,7 +72,7 @@ def visualize_features(data):
     #       - scatter plot, color='red', alpha=0.6
     #       - labels and title
     #       - grid
-    axes[1, 0].scatter(data['Bathrooms'], data['Price ($)'], color='crimson')
+    axes[1, 0].scatter(data['Bathrooms'], data['Price'], color='crimson')
     axes[1, 0].set_xlabel('Bathrooms')
     axes[1, 0].set_ylabel('Price ($)')
     axes[1, 0].set_title('Bathrooms vs Price', fontweight='bold')
@@ -81,11 +81,11 @@ def visualize_features(data):
     #       - scatter plot, color='orange', alpha=0.6
     #       - labels and title
     #       - grid
-    axes[1, 0].scatter(data['Age'], data['Price ($)'], color='orange')
-    axes[1, 0].set_xlabel('Age')
-    axes[1, 0].set_ylabel('Price ($)')
-    axes[1, 0].set_title('Age vs Price', fontweight='bold')
-    axes[1, 0].grid(True, alpha=0.3)
+    axes[1, 1].scatter(data['Age'], data['Price'], color='orange')
+    axes[1, 1].set_xlabel('Age')
+    axes[1, 1].set_ylabel('Price ($)')
+    axes[1, 1].set_title('Age vs Price', fontweight='bold')
+    axes[1, 1].grid(True, alpha=0.3)
     # TODO: Use plt.tight_layout() to make plots fit nicely
     plt.tight_layout()
     # TODO: Save the figure as 'feature_plots.png' with dpi=300
@@ -263,13 +263,16 @@ def make_prediction(model, sqft, bedrooms, bathrooms, age):
     """
     # TODO: Create a DataFrame with the house features
     #       columns should be: ['SquareFeet', 'Bedrooms', 'Bathrooms', 'Age']
-    
+    house_features = pd.DataFrame([[sqft, bedrooms, bathrooms, age]],
+                                  columns=['SquareFeet', 'Bedrooms', 'Bathrooms', 'Age'])
     # TODO: Make a prediction using model.predict()
-    
+    predicted_price = model.predict(house_features)[0]
     # TODO: Print the house specs and predicted price nicely formatted
-    
+    print(f"\n=== New Prediction ===")
+    print(f"House specs: {sqft:.0f} square feet, {bedrooms} bedrooms, {bathrooms} bathrooms, {age} years old")
+    print(f"Predicted Price: ${predicted_price:,.2f}")
     # TODO: Return the predicted price
-    pass
+    return predicted_price
 
 
 if __name__ == "__main__":
@@ -297,10 +300,10 @@ if __name__ == "__main__":
     predictions = evaluate_model(model, X_test, y_test, X.columns)
     # Step 7: Compare predictions
     # TODO: Call compare_predictions() showing first 10 examples
-    
+    compare_predictions(y_test, predictions)
     # Step 8: Make a new prediction
     # TODO: Call make_prediction() for a house of your choice
-    
+    make_prediction(model,2350,5,3,11)
     print("\n" + "=" * 70)
     print("✓ Assignment complete! Check your saved plots.")
     print("Don't forget to complete a6_part2_writeup.md!")
